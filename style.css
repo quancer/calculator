@@ -60,24 +60,33 @@
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
-  border-radius: 100px;
+  border-radius: 50%;
   line-height: normal;
   display: flex;
-  text-align: center;
+  /* text-align: center; */
   justify-content: center;
   align-items: center;
   padding: 20px;
+  border: none;
   /* flex-grow: 1; */
 }
+.btn:active {
+  background-color: aqua;
+}
+
 .gray-bg {
   background: #a5a5a5;
   color: #000;
 }
 .orange-bg {
-  background: #f89b10;
+  background-color: #f89b10;
+}
+.orange-bg:focus {
+  background-color: #ff8800;
 }
 .lg {
   width: 100%;
+  border-radius: 35px;
   grid-column-start: 1;
   grid-column-end: 3;
 }

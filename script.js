@@ -42,14 +42,15 @@ root.appendChild(cal);
 const head = createTag("div", "head");
 cal.appendChild(head);
 const headText = createTag("p", "headText");
-headText.innerHTML = "0";
+headText.innerText = "0";
 head.appendChild(headText);
 
 const calcb = createTag("div", "calc-body");
 cal.appendChild(calcb);
 
 for (let i = 0; i < buttons.length; i++) {
-  const btn = createTag("div", "btn", i);
+  const btn = createTag("input", "btn", i + 1);
+  btn.setAttribute("type", "button");
   if (buttons[i] == "AC" || buttons[i] == "+/-" || buttons[i] == "%") {
     btn.setAttribute("class", "btn gray-bg");
   }
@@ -65,20 +66,20 @@ for (let i = 0; i < buttons.length; i++) {
   if (buttons[i] == "0") {
     btn.setAttribute("class", "btn lg");
   }
-  btn.innerText = buttons[i];
+  btn.value = buttons[i];
   btn.addEventListener("click", (e) => {
-    const input = e.target.innerText;
+    const input = e.target.value;
+
     const k = headText.innerText;
     if (input == "AC" || input == "C") {
       nowClick = true;
-
+      document.getElementById("1").value = "AC";
       headText.innerText = "0";
       floatNum = false;
       calAction = false;
       nest = 0;
       count = 0;
     } else if (input == "+/-") {
-      console.log(k[0]);
       if (k[0] == "-") {
         headText.innerText = Number(k) * -1;
       } else {
@@ -105,7 +106,7 @@ for (let i = 0; i < buttons.length; i++) {
         calAction = true;
         calAc = input;
         count = 0;
-        console.log("nest=", nest);
+
         floatNum = false;
         nowClick = false;
       }
@@ -126,19 +127,25 @@ for (let i = 0; i < buttons.length; i++) {
       headText.innerText = result;
     } else if (calAction == false) {
       if (headText.innerText == "0") {
-        headText.innerText = e.target.innerText;
+        headText.innerText = e.target.value;
+        document.getElementById("1").value = "C";
         count++;
       } else {
         count++;
-        headText.innerText += e.target.innerText;
+        headText.innerText += e.target.value;
+        document.getElementById("1").value = "C";
+        // console.log("btn");
       }
     } else {
       if (count == 0) {
         count++;
-        headText.innerText = e.target.innerText;
+        headText.innerText = e.target.value;
+        document.getElementById("1").value = "C";
       } else {
         count++;
-        headText.innerText += e.target.innerText;
+        headText.innerText += e.target.value;
+        document.getElementById("1").value = "C";
+        // console.log("btn", btn[0]);
       }
     }
   });
