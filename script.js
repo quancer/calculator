@@ -71,7 +71,9 @@ for (let i = 0; i < buttons.length; i++) {
     const input = e.target.value;
     const k = headText.innerText;
     c++;
-    document.getElementById("headId").style.fontSize = `${100 - c * 10}px`;
+    document.getElementById("headId").style.fontSize = `${
+      100 - document.getElementById("headId").length
+    }px`;
     if (input == "AC" || input == "C") {
       nowClick = true;
       document.getElementById("1").value = "AC";
