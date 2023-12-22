@@ -38,10 +38,10 @@ let nowClick = true;
 const root = document.getElementById("root");
 const cal = createTag("div", "calc");
 root.appendChild(cal);
-
-const head = createTag("div", "head");
+let c = 1;
+const head = createTag("div", "head", "disp");
 cal.appendChild(head);
-const headText = createTag("p", "headText");
+const headText = createTag("p", "headText", "headId");
 headText.innerText = "0";
 head.appendChild(headText);
 
@@ -69,8 +69,9 @@ for (let i = 0; i < buttons.length; i++) {
   btn.value = buttons[i];
   btn.addEventListener("click", (e) => {
     const input = e.target.value;
-
     const k = headText.innerText;
+    c++;
+    document.getElementById("headId").style.fontSize = `${100 - c * 10}px`;
     if (input == "AC" || input == "C") {
       nowClick = true;
       document.getElementById("1").value = "AC";
@@ -123,7 +124,6 @@ for (let i = 0; i < buttons.length; i++) {
       } else if (calAc == "/") {
         result = div(nest, Number(a));
       }
-
       headText.innerText = result;
     } else if (calAction == false) {
       if (headText.innerText == "0") {
