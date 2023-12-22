@@ -8,10 +8,6 @@ function createTag(tagName, tagClass, tagId) {
   }
   return tag;
 }
-let a = "3.";
-// a = a - ".";
-
-console.log("a=", a[a.length - 1]);
 const buttons = [
   "AC",
   "+/-",
@@ -38,6 +34,7 @@ let nest = 0;
 let calAction = false;
 let calAc;
 let count;
+let nowClick = true;
 const root = document.getElementById("root");
 const cal = createTag("div", "calc");
 root.appendChild(cal);
@@ -73,6 +70,8 @@ for (let i = 0; i < buttons.length; i++) {
     const input = e.target.innerText;
     const k = headText.innerText;
     if (input == "AC" || input == "C") {
+      nowClick = true;
+
       headText.innerText = "0";
       floatNum = false;
       calAction = false;
@@ -101,13 +100,17 @@ for (let i = 0; i < buttons.length; i++) {
         count++;
       }
     } else if (input == "+" || input == "-" || input == "/" || input == "*") {
-      nest = Number(k);
-      calAction = true;
-      calAc = input;
-      count = 0;
-      console.log("nest=", nest);
-      floatNum = false;
+      if (nowClick) {
+        nest = Number(k);
+        calAction = true;
+        calAc = input;
+        count = 0;
+        console.log("nest=", nest);
+        floatNum = false;
+        nowClick = false;
+      }
     } else if (input == "=") {
+      nowClick = true;
       let a = headText.innerText;
       result = nest + Number(a);
       if (calAc == "+") {
